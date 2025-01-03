@@ -48,7 +48,7 @@
             <div class="swiper-wrapper">
                 @foreach ($popularBoardingHouses as $popularBoardingHouse)
                     <div class="swiper-slide !w-fit">
-                        <a href="details.html" class="card">
+                        <a href="{{ route('kos.show', $popularBoardingHouse->slug) }}" class="card">
                             <div
                                 class="flex flex-col w-[250px] shrink-0 rounded-[30px] border border-[#F1F2F6] p-4 pb-5 gap-[10px] hover:border-[#91BF77] transition-all duration-300">
                                 <div class="flex w-full h-[150px] shrink-0 rounded-[30px] bg-[#D9D9D9] overflow-hidden">
@@ -128,12 +128,12 @@
         </div>
         <div class="flex flex-col gap-4">
             @foreach ($boardingHouses as $boardingHouse)
-                <a href="details.html" class="card">
+                <a href="{{ route('kos.show', $boardingHouse->slug) }}" class="card">
                     <div
                         class="flex rounded-[30px] border border-[#F1F2F6] p-4 gap-4 bg-white hover:border-[#91BF77] transition-all duration-300">
                         <div class="flex w-[120px] h-[183px] shrink-0 rounded-[30px] bg-[#D9D9D9] overflow-hidden">
-                            <img src="{{ asset('storage/' . $boardingHouse->thumbnail) }}" class="w-full h-full object-cover"
-                                alt="icon">
+                            <img src="{{ asset('storage/' . $boardingHouse->thumbnail) }}"
+                                class="w-full h-full object-cover" alt="icon">
                         </div>
                         <div class="flex flex-col gap-3 w-full">
                             <h3 class="font-semibold text-lg leading-[27px] line-clamp-2 min-h-[54px]">
@@ -149,7 +149,8 @@
                                 <p class="text-sm text-ngekos-grey">4 People</p>
                             </div>
                             <hr class="border-[#F1F2F6]">
-                            <p class="font-semibold text-lg text-ngekos-orange">Rp. {{ number_format($boardingHouse->price, 0, ',', '.') }}<span
+                            <p class="font-semibold text-lg text-ngekos-orange">Rp.
+                                {{ number_format($boardingHouse->price, 0, ',', '.') }}<span
                                     class="text-sm text-ngekos-grey font-normal">/bulan</span></p>
                         </div>
                     </div>
