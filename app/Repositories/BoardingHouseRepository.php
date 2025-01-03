@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\BoardingHouseRepositoryInterface;
 use App\Models\BoardingHouse;
-use Filament\Forms\Components\Builder;
+use Illuminate\Database\Eloquent\Builder;
 
 class BoardingHouseRepository implements BoardingHouseRepositoryInterface
 {
@@ -27,6 +27,8 @@ class BoardingHouseRepository implements BoardingHouseRepositoryInterface
                 $query->where('slug', $category);
             });
         }
+
+        return $query->get();
     }
 
     public function getPopularBoardingHouse($limit = 5)
