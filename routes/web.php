@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BoardingHouseController;
 use App\Http\Controllers\CheckController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -17,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/check-booking', [CheckController::class, 'check'])->name('check-booking');
+Route::get('/find-kos', [BoardingHouseController::class, 'find'])->name('find-kos');
