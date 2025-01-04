@@ -57,6 +57,25 @@ class BookingController extends Controller
         $this->transactionRepository->saveTransactionsDataFromSession($request->all());
         $transaction = $this->transactionRepository->saveTransaction($this->transactionRepository->getTransactionsDataFromSession());
 
-        dd($transaction);
+        \Midtrans\Config::$serverKey = config('midtrans.serverKey');
+        \Midtrans\Config::$isProduction = config('midtrans.isProduction');
+        \Midtrans\Config::$isSanitized = config('midtrans.isSanitized');
+        \Midtrans\Config::$is3ds = config('midtrans.is3ds');
+
+        $transactionData = [
+            'transaction_details' => [
+                'order_id' => $transaction->code,
+                'gross_amount' => $transaction->total_amount,
+            ],
+            'customer_details' => [
+                'first_name' => $transaction->name,
+                'email' => $transaction->email,
+                'phone' => $transaction->phone_number,
+            ],
+        ];
+
+        $snapUrl = \Midtrans\Snap::createTransaction($transactionData)->redirect_url;
+
+        return redirect($snapUrl);
     }
 }
