@@ -51,4 +51,12 @@ class BookingController extends Controller
 
         return view('pages.booking.checkout', compact('transaction', 'boardingHouse', 'room'));
     }
+
+    public function payment(Request $request, $slug)
+    {
+        $this->transactionRepository->saveTransactionsDataFromSession($request->all());
+        $transaction = $this->transactionRepository->saveTransaction($this->transactionRepository->getTransactionsDataFromSession());
+
+        dd($transaction);
+    }
 }
