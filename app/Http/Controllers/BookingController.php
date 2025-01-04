@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CustomerInformationStoreRequest;
 use App\Interfaces\BoardingHouseRepositoryInterface;
 use App\Interfaces\TransactionRepositoryInterface;
 use App\Models\Room;
@@ -32,5 +33,22 @@ class BookingController extends Controller
         $room = $this->boardingHouseRepository->getBoardingHouseRoomById($transaction['room_id']);
 
         return view('pages.booking.information', compact('transaction', 'boardingHouse', 'room'));
+    }
+
+    public function save(CustomerInformationStoreRequest $request, $slug)
+    {
+        $data = $request->validated();
+        $this->transactionRepository->saveTransactionsDataFromSession($data);
+
+        return redirect()->route('booking.checkout', $slug);
+    }
+
+    public function checkout($slug)
+    {
+        $transaction = $this->transactionRepository->getTransactionsDataFromSession();
+        $boardingHouse = $this->boardingHouseRepository->getBoardingHouseBySlug($slug);
+        $room = $this->boardingHouseRepository->getBoardingHouseRoomById($transaction['room_id']);
+
+        return view('pages.booking.checkout', compact('transaction', 'boardingHouse', 'room'));
     }
 }
