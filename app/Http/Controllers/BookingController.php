@@ -78,4 +78,14 @@ class BookingController extends Controller
 
         return redirect($snapUrl);
     }
+
+    public function success(Request $request)
+    {
+        $transaction = $this->transactionRepository->getTransactionByCode($request->order_id);
+        if(!$transaction) {
+            abort(404);
+        }
+
+        return view('pages.booking.success', compact('transaction'));
+    }
 }

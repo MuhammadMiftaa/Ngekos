@@ -66,4 +66,9 @@ class TransactionRepository implements TransactionRepositoryInterface
 
         return $total;
     }
+
+    public function getTransactionByCode($code)
+    {
+        return Transaction::where('code', $code)->first();
+    }
 }
