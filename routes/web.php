@@ -6,7 +6,6 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\TEMPORARYFilamentUser;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,5 +40,3 @@ Route::post('/booking-detail', [CheckController::class, 'show'])->name('check-bo
 
 Route::get('/find-kos', [BoardingHouseController::class, 'find'])->name('find-kos');
 Route::get('/find-results', [BoardingHouseController::class, 'findResults'])->name('find-kos.results');
-// TEMPORARY
-Route::get('/make-filament-user', [TEMPORARYFilamentUser::class, 'createFilamentUser']);
