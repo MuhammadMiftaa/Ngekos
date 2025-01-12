@@ -5,8 +5,6 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Twilio\Rest\Client;
 
 class MidtransController extends Controller
 {
@@ -31,48 +29,58 @@ class MidtransController extends Controller
             ], 404);
         }
 
-        $sid    = config('twilio.twilio_sid');
-        $token  = config('twilio.twilio_token');
-        $twilio = new Client($sid, $token);
-
-        $message =
-            "Halo, " . $transaction->name . "!" . PHP_EOL .
-            "Kami telah menerima pembayaran untuk pembelian anda dengan kode booking: " . $transaction->code . "." . PHP_EOL .
-            "Total Pembayaran: Rp " . number_format($transaction->total_amount, 0, ',', '.') . "." . PHP_EOL . PHP_EOL .
-            "Anda bisa datang ke kos: " . $transaction->boardingHouse->name . PHP_EOL .
-            "Alamat: " . $transaction->boardingHouse->address . PHP_EOL .
-            "Mulai tanggal: " . date('d-m-Y', strtotime($transaction->start_date)) . PHP_EOL . PHP_EOL .
-            "Terima kasih sudah menggunakan aplikasi kami🏘️" . PHP_EOL .
-            "Kami tunggu kedatangan anda.";;
-
-        try {
-            if (in_array($request->transaction_status, ['capture', 'settlement'])) {
-                $transaction->update(['payment_status' => 'success']);
-                // Menghapus angka 0 di awal nomor telepon jika ada
-                $phoneNumber = ltrim($transaction->phone_number, '0');
-
-                // Menambahkan kode negara +62 di depan nomor telepon
-                $formattedPhoneNumber = "+62{$phoneNumber}";
-
-                // Mengirim pesan WhatsApp menggunakan Twilio
-                $twilio->messages->create(
-                    "whatsapp:{$formattedPhoneNumber}",
-                    [
-                        "from" => "whatsapp:+14155238886",
-                        'body' => $message,
-                    ]
-                );
-            } elseif ($request->transaction_status === 'cancel') {
-                $transaction->update(['payment_status' => 'canceled']);
-            } elseif ($request->transaction_status === 'deny') {
-                $transaction->update(['payment_status' => 'failed']);
-            } elseif ($request->transaction_status === 'expire') {
-                $transaction->update(['payment_status' => 'expired']);
-            } else {
-                $transaction->update(['payment_status' => 'pending']);
-            }
-        } catch (\Exception $e) {
-            Log::error('Failed to process transaction', ['error' => $e->getMessage(), 'transaction' => $transaction->id]);
+        switch ($transactionStatus) {
+            case 'capture':
+                if ($request->payment_type == 'credit_card') {
+                    if ($request->fraud_status == 'challenge') {
+                        $transaction->update([
+                            'payment_status' => 'pending',
+                        ]);
+                    } else {
+                        $transaction->update([
+                            'payment_status' => 'success',
+                        ]);
+                    }
+                }
+                break;
+            case 'settlement':
+                if ($transaction->payment_status === 'pending') {
+                    $transaction->update([
+                        'payment_status' => 'success',
+                    ]);
+                }
+                break;
+            case 'cancel':
+                if ($transaction->payment_status === 'pending') {
+                    $transaction->update([
+                        'payment_status' => 'canceled',
+                    ]);
+                }
+                break;
+            case 'deny':
+                if ($transaction->payment_status === 'pending') {
+                    $transaction->update([
+                        'payment_status' => 'failed',
+                    ]);
+                }
+                break;
+            case 'expire':
+                if ($transaction->payment_status === 'pending') {
+                    $transaction->update([
+                        'payment_status' => 'expired',
+                    ]);
+                }
+                break;
+            case 'pending':
+                $transaction->update([
+                    'payment_status' => 'pending',
+                ]);
+                break;
+            default:
+                $transaction->update([
+                    'payment_status' => 'unknown',
+                ]);
+                break;
         }
     }
 }

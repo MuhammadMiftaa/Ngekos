@@ -44,7 +44,11 @@ class TransactionResource extends Resource
                         'down_payment' => 'Down Payment',
                         'full_payment' => 'Full Payment',
                     ]),
-                Forms\Components\TextInput::make('payment_status'),
+                Forms\Components\Select::make('payment_status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'paid' => 'Paid',
+                    ]),
                 Forms\Components\Datepicker::make('start_date')
                     ->required(),
                 Forms\Components\TextInput::make('duration')
