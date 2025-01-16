@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             CitySeeder::class,
             CategorySeeder::class,
             BoardingHouseSeeder::class,
+            RoomSeeder::class,
+            BonusSeeder::class,
         ]);
     }
 }

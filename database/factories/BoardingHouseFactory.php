@@ -31,4 +31,3 @@ class BoardingHouseFactory extends Factory
         ];
     }
 }
-s
