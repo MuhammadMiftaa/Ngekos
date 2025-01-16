@@ -15,9 +15,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            FilamentUserSeeder::class,
+            // FilamentUserSeeder::class,
             CitySeeder::class,
             CategorySeeder::class,
+            BoardingHouseSeeder::class,
         ]);
     }
 }

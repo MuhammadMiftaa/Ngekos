@@ -12,6 +12,7 @@ use App\Repositories\CityRepository;
 use App\Repositories\TransactionRepository;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use Faker\Factory as FakerFactory;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,5 +35,9 @@ class AppServiceProvider extends ServiceProvider
         if (str_contains(request()->url(), 'ngrok-free.app')) {
             URL::forceScheme('https');
         }
+
+        $this->app->singleton(\Faker\Generator::class, function () {
+            return FakerFactory::create('id_ID'); // Mengatur locale ke Indonesia
+        });
     }
 }
