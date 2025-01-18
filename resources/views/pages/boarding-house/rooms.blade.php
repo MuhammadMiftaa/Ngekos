@@ -44,7 +44,7 @@
                     <div
                         class="flex rounded-[30px] border border-[#F1F2F6] p-4 gap-4 bg-white hover:border-[#91BF77] group-has-[:checked]:ring-2 group-has-[:checked]:ring-[#91BF77] transition-all duration-300">
                         <div class="flex w-[120px] h-[156px] shrink-0 rounded-[30px] bg-[#D9D9D9] overflow-hidden">
-                            <img src="{{ asset('storage/' . $room->images->first()->image) }}"
+                            <img src="{{ $room->images->first()->image }}"
                                 class="w-full h-full object-cover" alt="icon">
                         </div>
                         <div class="flex flex-col gap-3 w-full">
