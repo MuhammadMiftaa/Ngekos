@@ -15,7 +15,7 @@
         <div class="flex flex-col w-full rounded-[30px] border border-[#F1F2F6] p-4 gap-4 bg-white">
             <div class="flex gap-4">
                 <div class="flex w-[120px] h-[132px] shrink-0 rounded-[30px] bg-[#D9D9D9] overflow-hidden">
-                    <img src="{{ asset('storage/' . $transaction->boardingHouse->thumbnail) }}"
+                    <img src="{{ $transaction->boardingHouse->thumbnail }}"
                         class="w-full h-full object-cover" alt="icon">
                 </div>
                 <div class="flex flex-col gap-3 w-full">
@@ -37,7 +37,7 @@
             <hr class="border-[#F1F2F6]">
             <div class="flex gap-4">
                 <div class="flex w-[120px] h-[138px] shrink-0 rounded-[30px] bg-[#D9D9D9] overflow-hidden">
-                    <img src="{{ asset('storage/' . $transaction->room->images->first()->image) }}"
+                    <img src="{{ $transaction->room->images->first()->image }}"
                         class="w-full h-full object-cover" alt="icon">
                 </div>
                 <div class="flex flex-col gap-3 w-full">

@@ -16,7 +16,7 @@
         <div class="flex flex-col w-full rounded-[30px] border border-[#F1F2F6] p-4 gap-4 bg-white">
             <div class="flex gap-4">
                 <div class="flex w-[120px] h-[132px] shrink-0 rounded-[30px] bg-[#D9D9D9] overflow-hidden">
-                    <img src="{{ asset('storage/' . $boardingHouse->thumbnail) }}" class="w-full h-full object-cover"
+                    <img src="{{ $boardingHouse->thumbnail }}" class="w-full h-full object-cover"
                         alt="icon">
                 </div>
                 <div class="flex flex-col gap-3 w-full">

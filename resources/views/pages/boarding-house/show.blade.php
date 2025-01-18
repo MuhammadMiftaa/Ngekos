@@ -21,7 +21,7 @@
                 @foreach ($room->images as $image)
                     <div class="swiper-slide !w-fit">
                         <div class="flex shrink-0 w-[320px] h-[430px] overflow-hidden">
-                            <img src="{{ asset('storage/' . $image->image) }}" class="w-full h-full object-cover"
+                            <img src="{{ $image->image }}" class="w-full h-full object-cover"
                                 alt="gallery thumbnails">
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                         <div
                             class="bonus-card flex items-center rounded-[22px] border border-[#F1F2F6] p-[10px] gap-3 hover:border-[#91BF77] transition-all duration-300">
                             <div class="flex w-[120px] h-[90px] shrink-0 rounded-[18px] bg-[#D9D9D9] overflow-hidden">
-                                <img src="{{ asset('storage/' . $bonus->image) }}" class="w-full h-full object-cover"
+                                <img src="{{ $bonus->image }}" class="w-full h-full object-cover"
                                     alt="thumbnails">
                             </div>
                             <div>
