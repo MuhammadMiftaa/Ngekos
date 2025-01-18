@@ -19,6 +19,24 @@ class BoardingHouseFactory extends Factory
      */
     public function definition()
     {
+        // Daftar thumbnail gambar
+        $thumbnails = [
+            'https://res.cloudinary.com/dblibr1t2/image/upload/v1737181047/ngekos-asset/boarding%20house/rywthxlgdsul5yzncled.jpg',
+            'https://res.cloudinary.com/dblibr1t2/image/upload/v1737181047/ngekos-asset/boarding%20house/tiirxaqku0dbw6yvap05.jpg',
+            'https://res.cloudinary.com/dblibr1t2/image/upload/v1737181047/ngekos-asset/boarding%20house/esrb5qcte7axdohwymbp.jpg',
+            'https://res.cloudinary.com/dblibr1t2/image/upload/v1737181048/ngekos-asset/boarding%20house/k7lpeh6ullonq3xfkunz.jpg',
+            'https://res.cloudinary.com/dblibr1t2/image/upload/v1737181048/ngekos-asset/boarding%20house/qe4kgtw37mr5awyljlmo.jpg',
+            'https://res.cloudinary.com/dblibr1t2/image/upload/v1737181048/ngekos-asset/boarding%20house/s8wvfxn6o9ylgzjo7edt.jpg',
+            'https://res.cloudinary.com/dblibr1t2/image/upload/v1737181048/ngekos-asset/boarding%20house/uqk6ll7om8xdkdqhh7dw.jpg',
+            'https://res.cloudinary.com/dblibr1t2/image/upload/v1737181048/ngekos-asset/boarding%20house/rismocywgdopipnblvnt.jpg',
+            'https://res.cloudinary.com/dblibr1t2/image/upload/v1737181049/ngekos-asset/boarding%20house/rdh1qixvavmwl6zhnaac.jpg',
+            'https://res.cloudinary.com/dblibr1t2/image/upload/v1737181049/ngekos-asset/boarding%20house/sek0x8jtnjl5ktahpg6q.jpg',
+            'https://res.cloudinary.com/dblibr1t2/image/upload/v1737181049/ngekos-asset/boarding%20house/w5r6xbx0zzirbepzcobs.jpg',
+            'https://res.cloudinary.com/dblibr1t2/image/upload/v1737181049/ngekos-asset/boarding%20house/klzyi9i8es0vpbbu6dmu.jpg',
+            'https://res.cloudinary.com/dblibr1t2/image/upload/v1737181049/ngekos-asset/boarding%20house/pe0dffbx6hnccg2drb5m.jpg',
+            'https://res.cloudinary.com/dblibr1t2/image/upload/v1737181050/ngekos-asset/boarding%20house/j1sc6tmp6yv2hvzhr2zg.jpg',
+        ];
+
         // Pola nama boarding house
         $namePatterns = [
             'Kos {firstName}', // Contoh: Kos Andi
@@ -46,7 +64,7 @@ class BoardingHouseFactory extends Factory
         return [
             'name' => $name,
             'slug' => fn(array $attributes) => Str::slug($attributes['name']),
-            'thumbnail' => $this->faker->imageUrl(640, 480, 'boarding house', true),
+            'thumbnail' => $this->faker->randomElement($thumbnails), // Pilih thumbnail acak
             'city_id' => City::inRandomOrder()->first()->id,
             'category_id' => Category::inRandomOrder()->first()->id,
             'description' => $this->faker->text(200),
