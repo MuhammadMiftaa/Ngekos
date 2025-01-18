@@ -21,8 +21,7 @@
                         <div
                             class="flex flex-col items-center w-[120px] shrink-0 rounded-[40px] p-4 pb-5 gap-3 bg-white shadow-[0px_12px_30px_0px_#0000000D] text-center">
                             <div class="w-[70px] h-[70px] rounded-full flex shrink-0 overflow-hidden">
-                                <img src="{{ asset('storage/' . $category->image) }}" class="w-full h-full object-cover"
-                                    alt="thumbnail">
+                                <img src="{{ $category->image }}" class="w-full h-full object-cover" alt="thumbnail">
                             </div>
                             <div class="flex flex-col gap-[2px]">
                                 <h3 class="font-semibold">{{ $category->name }}</h3>
@@ -104,8 +103,7 @@
                         class="flex items-center rounded-[22px] p-[10px] gap-3 bg-white border border-white overflow-hidden hover:border-[#91BF77] transition-all duration-300">
                         <div
                             class="w-[55px] h-[55px] flex shrink-0 rounded-full border-4 border-white ring-1 ring-[#F1F2F6] overflow-hidden">
-                            <img src="{{ $city->image }}" class="w-full h-full object-cover"
-                                alt="icon">
+                            <img src="{{ $city->image }}" class="w-full h-full object-cover" alt="icon">
                         </div>
                         <div class="flex flex-col gap-[2px]">
                             <h3 class="font-semibold">{{ $city->name }}</h3>
