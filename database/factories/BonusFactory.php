@@ -19,18 +19,24 @@ class BonusFactory extends Factory
     {
         $faker = \Faker\Factory::create('id_ID');
 
+        // Array pasangan bonus dan URL gambar
+        $bonuses = [
+            'Laundry' => 'https://res.cloudinary.com/dblibr1t2/image/upload/v1737173589/ngekos-asset/bonus/bshlfoq5xblvpurdk6rl.jpg',
+            'Makan Pagi' => 'https://res.cloudinary.com/dblibr1t2/image/upload/v1737173588/ngekos-asset/bonus/urkyqifxhmkts8jlryqb.jpg',
+            'Makan Siang' => 'https://res.cloudinary.com/dblibr1t2/image/upload/v1737173588/ngekos-asset/bonus/on97hzxdj55kxs3y4hjp.jpg',
+            'Makan Malam' => 'https://res.cloudinary.com/dblibr1t2/image/upload/v1737173588/ngekos-asset/bonus/gunixyg0uafqkp7zjdoz.jpg',
+            'Snack' => 'https://res.cloudinary.com/dblibr1t2/image/upload/v1737173588/ngekos-asset/bonus/tbhurumalqn2dpvikq51.jpg',
+            'Toilet Pribadi' => 'https://res.cloudinary.com/dblibr1t2/image/upload/v1737173588/ngekos-asset/bonus/ihogx1rntnyydryhftlg.jpg',
+            'WiFi' => 'https://res.cloudinary.com/dblibr1t2/image/upload/v1737173588/ngekos-asset/bonus/snqbkw6nzipnyl6wdv0h.jpg',
+        ];
+
+        // Pilih bonus secara acak
+        $bonusName = $faker->randomElement(array_keys($bonuses));
+
         return [
             'boarding_house_id' => BoardingHouse::inRandomOrder()->first()->id,
-            'name' => $faker->randomElement([
-                'Laundry', 
-                'Makan Pagi', 
-                'Makan Siang', 
-                'Makan Malam', 
-                'Snack', 
-                'Toilet Pribadi', 
-                'WiFi'
-            ]),
-            'image' => $faker->imageUrl(640, 480, 'bonus', true), // URL gambar acak
+            'name' => $bonusName,
+            'image' => $bonuses[$bonusName], // Gambar sesuai dengan bonus yang dipilih
             'description' => $faker->sentence(10), // Deskripsi acak
         ];
     }
