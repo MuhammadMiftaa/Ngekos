@@ -17,9 +17,11 @@ class BonusFactory extends Factory
      */
     public function definition()
     {
+        $faker = \Faker\Factory::create('id_ID');
+
         return [
             'boarding_house_id' => BoardingHouse::inRandomOrder()->first()->id,
-            'name' => $this->faker->randomElement([
+            'name' => $faker->randomElement([
                 'Laundry', 
                 'Makan Pagi', 
                 'Makan Siang', 
@@ -28,8 +30,8 @@ class BonusFactory extends Factory
                 'Toilet Pribadi', 
                 'WiFi'
             ]),
-            'image' => $this->faker->imageUrl(640, 480, 'bonus', true), // URL gambar acak
-            'description' => $this->faker->sentence(10), // Deskripsi acak
+            'image' => $faker->imageUrl(640, 480, 'bonus', true), // URL gambar acak
+            'description' => $faker->sentence(10), // Deskripsi acak
         ];
     }
 }

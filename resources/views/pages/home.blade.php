@@ -104,7 +104,7 @@
                         class="flex items-center rounded-[22px] p-[10px] gap-3 bg-white border border-white overflow-hidden hover:border-[#91BF77] transition-all duration-300">
                         <div
                             class="w-[55px] h-[55px] flex shrink-0 rounded-full border-4 border-white ring-1 ring-[#F1F2F6] overflow-hidden">
-                            <img src="{{ asset('storage/' . $city->image) }}" class="w-full h-full object-cover"
+                            <img src="{{ $city->image }}" class="w-full h-full object-cover"
                                 alt="icon">
                         </div>
                         <div class="flex flex-col gap-[2px]">
