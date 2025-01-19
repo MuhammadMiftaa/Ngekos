@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             BoardingHouseSeeder::class,
             RoomSeeder::class,
             BonusSeeder::class,
+            RoomImageSeeder::class,
         ]);
     }
 }
