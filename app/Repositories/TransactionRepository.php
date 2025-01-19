@@ -55,16 +55,22 @@ class TransactionRepository implements TransactionRepositoryInterface
         $subtotal = $price * $duration;
         $tax = $subtotal * 0.11;
         $insurance = $subtotal * 0.01;
-        return $subtotal + $tax + $insurance;
+        $total = $subtotal + $tax + $insurance;
+
+        // Pastikan total adalah bilangan bulat
+        return floor($total);
     }
 
     private function calculatePaymentAmount($total, $paymentMethod)
     {
         if ($paymentMethod == 'down_payment') {
-            return $total * 0.3;
+            $payment = $total * 0.3;
+        } else {
+            $payment = $total;
         }
 
-        return $total;
+        // Pastikan jumlah pembayaran adalah bilangan bulat
+        return floor($payment);
     }
 
     public function getTransactionByCode($code)

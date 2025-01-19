@@ -31,7 +31,7 @@
                 <hr class="border-[#F1F2F6]">
                 <div class="flex gap-4">
                     <div class="flex w-[120px] h-[138px] shrink-0 rounded-[30px] bg-[#D9D9D9] overflow-hidden">
-                        <img src="{{ asset('storage/' . $transaction->room->images->first()->image) }}"
+                        <img src="{{ $transaction->room->images->first()->image }}"
                             class="w-full h-full object-cover" alt="icon">
                     </div>
                     <div class="flex flex-col gap-3 w-full">
