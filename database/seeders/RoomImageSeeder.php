@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Room;
 use App\Models\RoomImage;
 use Illuminate\Database\Seeder;
 
@@ -34,12 +35,19 @@ class RoomImageSeeder extends Seeder
             'https://res.cloudinary.com/dblibr1t2/image/upload/v1737184505/ngekos-asset/room/gczu1l7ysjp2qnhpbdpj.jpg'
         ];
 
-        // Buat 100 RoomImage
-        for ($roomId = 1; $roomId <= 100; $roomId++) {
-            RoomImage::create([
-                'room_id' => $roomId,
-                'image' => $images[array_rand($images)], // Pilih URL secara acak
-            ]);
+        // Ambil semua room yang ada
+        $rooms = Room::all();
+
+        // Buat RoomImage untuk setiap room yang ada
+        foreach ($rooms as $room) {
+            // Buat antara 1 hingga 3 gambar secara acak untuk setiap room
+            $numberOfImages = rand(1, 3);
+            for ($i = 0; $i < $numberOfImages; $i++) {
+                RoomImage::create([
+                    'room_id' => $room->id,
+                    'image' => $images[array_rand($images)], // Pilih URL secara acak
+                ]);
+            }
         }
     }
 }
